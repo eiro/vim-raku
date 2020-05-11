@@ -1,8 +1,8 @@
 " Vim filetype plugin file
 " Language:      Raku
-" Maintainer:    vim-perl <vim-perl@googlegroups.com>
-" Homepage:      https://github.com/vim-perl/vim-perl6
-" Bugs/requests: https://github.com/vim-perl/vim-perl6/issues
+" Maintainer:    rakoons <perl6-users@perl.org>
+" Homepage:      https://github.com/raku/vim-raku
+" Bugs/requests: https://github.com/raku/vim-raku/issues
 " Last Change:   {{LAST_CHANGE}}
 " Contributors:  Hinrik Örn Sigurðsson <hinrik.sig@gmail.com>
 "
