@@ -33,6 +33,10 @@ read the guidelines" in your issue when you create it.
 
 # Helping Out
 
+# Improve the code
+
+TODO: can't make `prove` work. any clue there?
+
 If you would like to contribute to vim-raku, please be aware that we
 have a test suite which can be run using the `prove` command.  After
 you've made your changes, run the test suite via `prove`.  The tests
@@ -44,3 +48,7 @@ make sure that their highlighting still makes sense.  If it does, note
 that in your pull request and a maintainer will update the regression
 corpus data when he/she merges it.
 
+# Improve the documentation
+
+new sections and translation are very welcome. don't forget to run
+`helptags doc` and commit the new `doc/tags` if you do so.
