@@ -38,39 +38,11 @@ setlocal define=[^A-Za-z_]
 set isfname+=:
 setlocal iskeyword=@,48-57,_,192-255,-
 
-" Set this once, globally.
-if !exists("perlpath")
-    if executable("perl6")
-        try
-            if &shellxquote != '"'
-                let perlpath = system('perl6 -e  "@*INC.join(q/,/).say"')
-            else
-                let perlpath = system("perl6 -e  '@*INC.join(q/,/).say'")
-            endif
-            let perlpath = substitute(perlpath,',.$',',,','')
-        catch /E145:/
-            let perlpath = ".,,"
-        endtry
-    else
-        " If we can't call perl to get its path, just default to using the
-        " current directory and the directory of the current file.
-        let perlpath = ".,,"
-    endif
-endif
-
-" Append perlpath to the existing path value, if it is set.  Since we don't
-" use += to do it because of the commas in perlpath, we have to handle the
-" global / local settings, too.
-if &l:path == ""
-    if &g:path == ""
-        let &l:path=perlpath
-    else
-        let &l:path=&g:path.",".perlpath
-    endif
+if exists('$RAKULIB')
+    let &l:path = "lib,.,".$RAKULIB.",".join(glob("~/.zef/store/*/*/lib",0,1),',')
 else
-    let &l:path=&l:path.",".perlpath
+    let &l:path = "lib,.,".join(glob("~/.zef/store/*/*/lib",0,1),',')
 endif
-"---------------------------------------------
 
 " Convert ascii-based ops into their single-character unicode equivalent
 if get(g:, 'raku_unicode_abbrevs', 0)
