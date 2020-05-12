@@ -21,15 +21,6 @@ Once installed, all files ending in `.raku`, `.rakudoc`, and `.rakutest` (and
 also `.pm6`, `.p6`, and `.t6` for legacy purposes) will make use of the
 plugin's features.
 
-### register documentation entries
-
-if you want the documentation of vim-raku to entries to appear in the help menu,
-run
-
-    :helptags $HOME/.vim/pack/vendor/start/raku/doc
-
-(assuming $HOME/.vim/pack/vendor/start/raku is the place where you installed the plugin)
-
 [pathogen]: https://github.com/tpope/vim-pathogen
 [vim-plug]: https://github.com/junegunn/vim-plug
 [vundle]: https://github.com/gmarik/Vundle.vim
