@@ -1,0 +1,130 @@
+*vim-raku.txt*  A raku integration to vim
+
+CONTENTS                                                      *vim-raku*
+
+vim-raku provides ftplugin and helpers to be productive with vim and raku.
+
+1. Using unicode in your raku files                       |raku-unicode-ascii|
+
+USING UNICODE IN YOUR RAKU FILES                          *raku-unicode-ascii*
+
+Defining new operators using unicode symbols is a good way to make your
+script easy to read. see
+
+https://perl6advent.wordpress.com/2012/12/18/day-18-formulas-resistance-is-futile/
+
+the natural way to get this symbols from vim is to use digraph shorteners
+(`:help digraphs-use`). a lot of them are defined (type `:digraphs` to get the
+list). A convenient way to read the list of digraphs is to save them in a
+file. from the shell:
+
+        vim +'redir >/tmp/non-existing-file-yet' +digraphs +'redir END' +q
+
+Also, raku comes with some of them included as alterative to ascii ones
+
+https://docs.raku.org/language/unicode_ascii
+
+some of them are available with digraphs
+
+        << «    /0 ∅    !< ≮
+        >> »    Ob ∘    !> ≯
+        ., …    00 ∞    (C ⊂
+        (U ∩    -: ÷    )C ⊃
+        )U ∪    (_ ⊆    >= ≥
+        ?= ≅    )_ ⊇    =< ≤
+        (- ∈    ?= ≅    != ≠
+        -) ∋    ?- ≃
+
+greek alphabet is available with `*` followed by a latin close symbol
+
+        *p π
+        *t τ
+        *X ×
+
+numbers subscripts and superscripts are availlable with s and S.
+
+        0s ₀    0S ⁰
+        1s ₁    1S ¹
+        2s ₂    9S ⁹
+
+but some don't come by default. those are digraph definitions you
+can add in your ~/.vimrc file.
+
+        exec 'digraph \\ '.char2nr('∖')
+        exec 'digraph \< '.char2nr('≼')
+        exec 'digraph \> '.char2nr('≽')
+        exec 'digraph (L '.char2nr('⊈')
+        exec 'digraph )L '.char2nr('⊉')
+        exec 'digraph @@ '.char2nr('⚛')
+        exec 'digraph (/ '.char2nr('⊄')
+        exec 'digraph )/ '.char2nr('⊅')
+        exec 'digraph )/ '.char2nr('⊅')
+        exec 'digraph U+ '.char2nr('⊎')
+        exec 'digraph 0- '.char2nr('⊖')
+        " number euler
+        exec 'digraph ne '.char2nr('𝑒')
+
+alternatively, you can write insert mode abbreviations that
+convert ascii-based ops into their single-character
+unicode equivalent.
+
+        iabbrev <buffer> !(<) ⊄
+        iabbrev <buffer> !(<=) ⊈
+        iabbrev <buffer> !(>) ⊅
+        iabbrev <buffer> !(>=) ⊉
+        iabbrev <buffer> !(cont) ∌
+        iabbrev <buffer> !(elem) ∉
+        iabbrev <buffer> != ≠
+        iabbrev <buffer> (&) ∩
+        iabbrev <buffer> (+) ⊎
+        iabbrev <buffer> (-) ∖
+        iabbrev <buffer> (.) ⊍
+        iabbrev <buffer> (<) ⊂
+        iabbrev <buffer> (<+) ≼
+        iabbrev <buffer> (<=) ⊆
+        iabbrev <buffer> (>) ⊃
+        iabbrev <buffer> (>+) ≽
+        iabbrev <buffer> (>=) ⊇
+        iabbrev <buffer> (\|) ∪
+        iabbrev <buffer> (^) ⊖
+        iabbrev <buffer> (atomic) ⚛
+        iabbrev <buffer> (cont) ∋
+        iabbrev <buffer> (elem) ∈
+        iabbrev <buffer> * ×
+        iabbrev <buffer> **0 ⁰
+        iabbrev <buffer> **1 ¹
+        iabbrev <buffer> **2 ²
+        iabbrev <buffer> **3 ³
+        iabbrev <buffer> **4 ⁴
+        iabbrev <buffer> **5 ⁵
+        iabbrev <buffer> **6 ⁶
+        iabbrev <buffer> **7 ⁷
+        iabbrev <buffer> **8 ⁸
+        iabbrev <buffer> **9 ⁹
+        iabbrev <buffer> ... …
+        iabbrev <buffer> / ÷
+        iabbrev <buffer> << «
+        iabbrev <buffer> <<[=]<< «=«
+        iabbrev <buffer> <<[=]>> «=»
+        iabbrev <buffer> <= ≤
+        iabbrev <buffer> =~= ≅
+        iabbrev <buffer> >= ≥
+        iabbrev <buffer> >> »
+        iabbrev <buffer> >>[=]<< »=«
+        iabbrev <buffer> >>[=]>> »=»
+        iabbrev <buffer> Inf ∞
+        iabbrev <buffer> atomic-add-fetch ⚛+=
+        iabbrev <buffer> atomic-assign ⚛=
+        iabbrev <buffer> atomic-fetch ⚛
+        iabbrev <buffer> atomic-dec-fetch --⚛
+        iabbrev <buffer> atomic-fetch-dec ⚛--
+        iabbrev <buffer> atomic-fetch-inc ⚛++
+        iabbrev <buffer> atomic-inc-fetch ++⚛
+        iabbrev <buffer> atomic-sub-fetch ⚛−=
+        iabbrev <buffer> e 𝑒
+        iabbrev <buffer> o ∘
+        iabbrev <buffer> pi π
+        iabbrev <buffer> set() ∅
+        iabbrev <buffer> tau τ
+
+
